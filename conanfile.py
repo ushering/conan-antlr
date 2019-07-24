@@ -5,15 +5,16 @@ import os
 
 class Antlr4Conan(ConanFile):
     name = "antlr4"
-    version = "4.7.2"
+    version = "4.7.2_src"
     license = "The BSD License"
     author = "Ruisheng Wang <ruisheng.wang@outlook.com>"
     url = "https://github.com/ushering/conan-antlr"
     description = "C++ runtime support for ANTLR"
     settings = "os", "compiler", "build_type", "arch"
     _source_subfolder = "source_subfolder"
+    exports_sources = os.path.join(_source_subfolder, '*')
 
-    def source(self):
+    def _source(self):
         source_url = "https://www.antlr.org/download/antlr4-cpp-runtime-{}-source.zip".format(self.version)
         tools.get(source_url, sha256="8631a39116684638168663d295a969ad544cead3e6089605a44fea34ec01f31a", destination=self._source_subfolder)
         source_url2 = "https://www.antlr.org/download/antlr-{}-complete.jar".format(self.version)
